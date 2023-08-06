@@ -1,1 +1,3 @@
-# SKZ
+
+php artisan serve
+
