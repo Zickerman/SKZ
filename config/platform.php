@@ -100,6 +100,8 @@ return [
      */
 
     'index' => 'platform.main',
+    'products' => 'platform.products',
+    'categories' => 'platform.categories',
 
     /*
      |--------------------------------------------------------------------------
@@ -160,8 +162,8 @@ return [
      */
 
     'template' => [
-        'header' => '',
-        'footer' => '',
+        'header' => 'skz.header',
+        'footer' => 'skz.footer',
     ],
 
     /*

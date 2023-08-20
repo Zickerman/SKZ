@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
                 $table->unsignedBigInteger('image_id')->nullable();
                 $table->string('name')->nullable();
                 $table->text('description')->nullable();
-                $table->decimal('price', 5)->default(0);
+                $table->decimal('price', 10)->default(0);
                 $table->boolean('available')->default(0);
                 $table->unsignedSmallInteger('amount')->default(0);
                 $table->foreign('category_id')->references('id')->on('categories')->restrictOnDelete()->onUpdate('cascade');

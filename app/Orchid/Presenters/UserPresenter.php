@@ -55,9 +55,10 @@ class UserPresenter extends Presenter implements Searchable, Personable
     {
         $hash = md5(strtolower(trim($this->entity->email)));
 
-        $default = urlencode('https://raw.githubusercontent.com/orchidsoftware/.github/main/web/avatars/gravatar.png');
+	    return '/img/manager-default.png';
 
-        return "https://www.gravatar.com/avatar/$hash?d=$default";
+//        $default = urlencode('https://raw.githubusercontent.com/orchidsoftware/.github/main/web/avatars/gravatar.png');
+//        return "https://www.gravatar.com/avatar/$hash?d=$default";
     }
 
     /**
