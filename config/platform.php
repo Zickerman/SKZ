@@ -162,8 +162,8 @@ return [
      */
 
     'template' => [
-        'header' => 'skz.header',
-        'footer' => 'skz.footer',
+        'header' => 'backend.header',
+        'footer' => 'backend.footer',
     ],
 
     /*

@@ -1,0 +1,11 @@
+.text_indent {
+    text-indent: 40px;
+}
+
+.main_catalog_gradient {
+    background: linear-gradient(to right, #58C795, #248D5D);
+}
+
+.main_catalog_card {
+    background-color: #75C6A1;
+}

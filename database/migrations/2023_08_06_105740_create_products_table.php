@@ -24,6 +24,7 @@ class CreateProductsTable extends Migration
                 $table->decimal('price', 10)->default(0);
                 $table->boolean('available')->default(0);
                 $table->unsignedSmallInteger('amount')->default(0);
+                $table->decimal('volume', 5, 3)->default(0);
                 $table->foreign('category_id')->references('id')->on('categories')->restrictOnDelete()->onUpdate('cascade');
                 $table->foreign('vendor_id')->references('id')->on('vendors')->restrictOnDelete()->onUpdate('cascade');
                 $table->foreign('image_id')->references('id')->on('images')->cascadeOnDelete()->onUpdate('cascade');
