@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Orchid\Layouts\skz\ProductsTable;
 use Illuminate\Http\Request;
+use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Support\Facades\Alert;
 use Orchid\Screen\Actions\ModalToggle;
@@ -73,8 +74,9 @@ class Products extends Screen
                 TextArea::make('description')->title('Описание')->rows(7)->type('text'),
                 Group::make([
                     Input::make('price')->required()->type('price')->title('Цена')->type('number'),
-                    Input::make('available')->required()->title('Доступность'),
                     Input::make('amount')->required()->title('Количество')->type('number'),
+                    Input::make('volume')->required()->title('Объем (л.)')->type('number')->min(0)->step(0.01)->placeholder('0.75'),
+                    CheckBox::make('available')->value(1)->title('Доступность'),
                 ]),
             ]))->title('Добавить продукт в базу данных')->applyButton('Создать'),
 
@@ -87,6 +89,7 @@ class Products extends Screen
                     Input::make('product.price')->required()->type('price')->title('Цена')->type('number'),
                     Select::make('product.available')->required()->title('Доступность')->options([1 => 'да', 0 => 'нет']),
                     Input::make('product.amount')->required()->title('Количество')->type('number'),
+                    Input::make('product.volume')->required()->title('Объем')->type('number')->min(0)->step(0.01),
                 ]),
             ]))->async('asyncGetProduct'),
         ];
@@ -104,7 +107,14 @@ class Products extends Screen
 
     public function create(Request $request):void
     {
-        Product::create($request->merge([])->except('_token'));
+        $productData = $request->except('_token');
+
+        $volume = (float) $productData['volume'];
+        if ($volume < 0 || $volume > 99.999) {
+            Alert::error('Товар не был сохранен. Проверьте введенные данные');
+            return;
+        }
+        Product::create($productData);
         Alert::success('Товар успешно добавлен');
     }
 }

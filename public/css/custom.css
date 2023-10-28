@@ -9,3 +9,8 @@
 .main_catalog_card {
     background-color: #75C6A1;
 }
+
+.about_page_img {
+    border-radius: 20px;
+    opacity: 70%;
+}

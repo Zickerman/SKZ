@@ -31,12 +31,12 @@
                     сок и многие другие. Так же продукцию завода отметили и на международном рынке, завод победил в
                     международной выставке-ярмарке в Берлине “Зеленая неделя 2015”.
                 </p>
-                <div class="row justify-content-between">
+                <div class="row justify-content-between p-3">
                     <div class="col-md-6">
-                        <img src="/img/products/awards(2).png" class="img-fluid" alt="Награды">
+                        <img src="/img/products/awards(2).png" class="img-fluid about_page_img" alt="Награды">
                     </div>
                     <div class="col-md-6">
-                        <img src="/img/products/awards.png" class="img-fluid" alt="Награды">
+                        <img src="/img/products/awards.png" class="img-fluid about_page_img" alt="Награды">
                     </div>
                 </div>
             </main>

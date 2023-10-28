@@ -3,10 +3,11 @@
 namespace App\Orchid\Layouts\skz;
 
 use App\Models\Category;
-use App\Models\Product;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
+use Orchid\Support\Facades\Alert;
 
 class CategoriesTable extends Table
 {
@@ -27,6 +28,10 @@ class CategoriesTable extends Table
      */
     protected function columns(): iterable
     {
+        if (session('warning')) {
+            Alert::error(session('warning'));
+        }
+
         return [
             TD::make('category_id', 'Категория')->sort()->render(function (Category $category){
                 return $category->category_id ? $category->where('id', "$category->category_id")->first()->name : $category->name;
@@ -45,6 +50,13 @@ class CategoriesTable extends Table
                     ->asyncParameters([
                         'category' => $category->id
                     ]);
+            }),
+
+            TD::make('delete', 'Удалить')->render(function (Category $category) {
+                return Button::make('Удалить')->icon('trash')
+                    ->confirm("<span style='color: #ff0000'>Будьте осторожны, т.к. удаление данной категори приведет к удалению всех записей принадлежащих ей!</span>")
+                    ->method('delete')
+                    ->parameters(['category' => $category->id]);
             }),
 
         ];

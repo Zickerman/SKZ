@@ -21,7 +21,26 @@
                     </div>
                 @endforeach
             </div>
-        </div>
+
+            <div class="mt-4">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item {{ $products->onFirstPage() ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $products->previousPageUrl() }}">Предыдущая</a>
+                        </li>
+                        @if($products->lastPage() > 1)
+                            @for ($i = 1; $i <= $products->lastPage(); $i++)
+                                <li class="page-item {{ $products->currentPage() == $i ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
+                        @endif
+                        <li class="page-item {{ !$products->hasMorePages() ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $products->nextPageUrl() }}">Следующая</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
     </div>
 
 @endsection

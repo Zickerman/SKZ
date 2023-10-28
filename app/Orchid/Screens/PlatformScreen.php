@@ -24,7 +24,7 @@ class PlatformScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Get Started';
+        return 'Главная СКЗ';
     }
 
     /**
@@ -32,7 +32,7 @@ class PlatformScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'Welcome to your Orchid application.';
+        return 'Добро пожаловать в административную панель. Здесь вы можете добавлять/удалять/редактировать позиции из каталога.';
     }
 
     /**
@@ -54,7 +54,7 @@ class PlatformScreen extends Screen
     {
         return [
             Layout::view('platform::partials.update-assets'),
-            Layout::view('platform::partials.welcome'),
+//            Layout::view('platform::partials.welcome'),
         ];
     }
 }

@@ -15,7 +15,7 @@ class MainController extends BaseController
 
     public function catalog()
     {
-        $products = Product::with('category:id,name')->get();
+        $products = Product::with('category:id,name')->paginate(8);
 
         $products->each(function ($product) {
             $product->description = Str::limit($product->description, 80);
