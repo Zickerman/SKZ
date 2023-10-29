@@ -15,10 +15,16 @@ class MainController extends BaseController
 
     public function catalog()
     {
-        $products = Product::with('category:id,name')->paginate(8);
+        $products = Product::with('category:id,name', 'images')->paginate(8);
 
         $products->each(function ($product) {
             $product->description = Str::limit($product->description, 80);
+
+            $firstImage = $product->images->first();
+            if ($firstImage) {
+                $imagePath = asset('product_photos/' . $firstImage->image_path . $firstImage->image_name);
+                $product->image_path = $imagePath;
+            }
         });
 
         return view('frontend/products', compact('products'));

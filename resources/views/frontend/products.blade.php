@@ -8,8 +8,7 @@
                     <div class="col">
                         <div class="card h-100 main_catalog_card">
                             <div class="card-body d-flex flex-column">
-                                <img src="/img/products/assort.png" class="card-img-top mx-auto"
-                                     alt="{{ $product->name }}" style="width: 140px; height: 180px;">
+                                <img class="img-fluid mx-auto" src="{{ $product->image_path }}" alt="{{ $product->name }}">
                                 <h5 class="card-title">{{ $product->name }}</h5>
                                 <p class="card-text">{{ $product->description }}</p>
                                 <p class="mt-auto card-text"><b>Категория:</b> {{ $product->category->name }}</p>

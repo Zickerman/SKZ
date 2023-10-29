@@ -6,11 +6,15 @@
    - user: 
 3. Выполнить миграции: php artisan migrate
 
-4. засеять БД данными можно следующими командами:
+4. засеять БД полностью:
+     php artisan db:seed
+5. засеять БД данными по отдельности можно следующими командами:
    для заполнения категорий:
      php artisan db:seed --class=CategoriesTableSeeder
    для заполнения продуктами:
      php artisan db:seed --class=ProductsTableSeeder
+   для заполнения изображениями:
+     php artisan db:seed --class=ImagesTableSeeder
 
 
 **Полезные команды:**
@@ -28,6 +32,6 @@
 
 **Нужно реализовать/сделать:**
 
-1. прикреплять изображения при добавлении продукта
+1. заменить asset('product_photos/' . $firstImage->image_path . $firstImage->image_name); на конфиг
 2. добавить возможность удаления продуктов
 3. поправить стили пагинатора

@@ -3,11 +3,15 @@
 namespace App\Orchid\Screens\skz;
 
 use App\Models\Category;
+use App\Models\Image as ProductImage;
+use Intervention\Image\ImageManagerStatic as Images;
 use App\Models\Product;
 use App\Orchid\Layouts\skz\ProductsTable;
 use Illuminate\Http\Request;
+use Orchid\Attachment\Models\Attachment;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\TextArea;
+use Orchid\Screen\Fields\Upload;
 use Orchid\Support\Facades\Alert;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Group;
@@ -78,6 +82,8 @@ class Products extends Screen
                     Input::make('volume')->required()->title('Объем (л.)')->type('number')->min(0)->step(0.01)->placeholder('0.75'),
                     CheckBox::make('available')->value(1)->title('Доступность'),
                 ]),
+                Upload::make('images')->title('Фотографии продукта')->multiple()->acceptedFiles('image/*')
+                    ->maxFiles(5)->groups('photo')->hint('Вы можете загрузить до 5 фотографий.')->storage('product_photos'),
             ]))->title('Добавить продукт в базу данных')->applyButton('Создать'),
 
             Layout::modal('editProduct', Layout::rows([
@@ -114,7 +120,33 @@ class Products extends Screen
             Alert::error('Товар не был сохранен. Проверьте введенные данные');
             return;
         }
-        Product::create($productData);
+
+        $product = Product::create($productData);
+
+        $photoIds = $request->input('images');
+        if (is_array($photoIds)) {
+            foreach ($photoIds as $photoId) {
+                $attachment = Attachment::find($photoId);
+
+                if ($attachment) {
+                    $productImage = new ProductImage([
+                        'image_path' => $attachment->path,
+                        'product_id' => $product->id,
+                        'image_name' => $attachment->name . '.' . $attachment->extension,
+                        'priority' => 0,
+                    ]);
+
+                    $imagePath = 'product_photos/' . $attachment->path . $attachment->name . '.' . $attachment->extension;
+
+                    $img = Images::make($imagePath);
+                    $img->fit(270, 370);
+                    $img->save($imagePath);
+
+                    $productImage->save();
+                }
+            }
+        }
+
         Alert::success('Товар успешно добавлен');
     }
 }

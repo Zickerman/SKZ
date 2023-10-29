@@ -36,9 +36,9 @@ return [
             'throw' => false,
         ],
 
-        'public' => [
+        'product_photos' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => public_path('product_photos'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
