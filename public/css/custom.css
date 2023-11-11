@@ -14,3 +14,25 @@
     border-radius: 20px;
     opacity: 70%;
 }
+
+/*переопределение пагинации bootstrap*/
+.pagination .page-item.active .page-link {
+    background-color: #58C795;
+    border-color: #248D5D;
+    color: #ffffff;
+}
+.pagination .page-link {
+    color: #248D5D;
+}
+.pagination .page-item.disabled .page-link {
+    color: #248D5D;
+}
+.pagination .page-item.disabled .page-link {
+    background-color: #95a5a6;
+    border-color: #95a5a6;
+}
+
+.card-title {
+    height: 3em; /* Установите желаемую высоту */
+    overflow: hidden;
+}

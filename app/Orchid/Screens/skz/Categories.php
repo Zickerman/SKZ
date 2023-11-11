@@ -104,14 +104,13 @@ class Categories extends Screen
 
         if ($category) {
             if ($category->children()->count() > 0) {
-                // Если у категории есть дочерние подкатегории, выведите предупреждение и не удаляйте
                 return redirect()->back()->with('warning', 'Эта категория имеет подкатегории. Удалите сначала подкатегории');
-            } else {
+            }
+            else {
                 $category->delete();
                 Alert::success('Категория успешно удалена');
             }
-        } else {
-            Alert::error('Категория не найдена');
         }
+            Alert::error('Категория не найдена');
     }
 }

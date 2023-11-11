@@ -111,8 +111,7 @@ class Products extends Screen
         Alert::success('Товар успешно обновлен');
     }
 
-    public function create(Request $request):void
-    {
+    public function create(Request $request){
         $productData = $request->except('_token');
 
         $volume = (float) $productData['volume'];
@@ -146,7 +145,17 @@ class Products extends Screen
                 }
             }
         }
-
         Alert::success('Товар успешно добавлен');
+    }
+
+    public function delete(Request $request){
+        $productId = $request->input('product');
+        $product = Product::find($productId);
+
+        if ($product) {
+            $product->delete();
+            Alert::success('Продукт успешно удален');
+        }
+        else Alert::error('Продукт не удален, возникла ошибка');
     }
 }

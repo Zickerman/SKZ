@@ -7,6 +7,7 @@ use App\Models\Product;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
+use Orchid\Screen\Actions\Button;
 
 class ProductsTable extends Table
 {
@@ -45,6 +46,12 @@ class ProductsTable extends Table
                     ->asyncParameters([
                         'product' => $product->id
                     ]);
+            }),
+            TD::make('delete', 'Удалить')->render(function (Product $product) {
+                return Button::make('Удалить')->icon('trash')
+                    ->confirm("<span style='color: #ff0000'>После подтверждения товар будет удален из базы данных!</span>")
+                    ->method('delete')
+                    ->parameters(['product' => $product->id]);
             }),
 
         ];
