@@ -18,7 +18,6 @@ class CreateProductsTable extends Migration
                 $table->id();
                 $table->unsignedBigInteger('category_id')->nullable();
                 $table->unsignedBigInteger('vendor_id')->nullable();
-                $table->unsignedBigInteger('image_id')->nullable();
                 $table->string('name')->nullable();
                 $table->text('description')->nullable();
                 $table->decimal('price', 10)->default(0);
@@ -27,7 +26,6 @@ class CreateProductsTable extends Migration
                 $table->decimal('volume', 5, 3)->default(0);
                 $table->foreign('category_id')->references('id')->on('categories')->restrictOnDelete()->onUpdate('cascade')->onDelete('cascade');
                 $table->foreign('vendor_id')->references('id')->on('vendors')->restrictOnDelete()->onUpdate('cascade');
-                $table->foreign('image_id')->references('id')->on('images')->cascadeOnDelete()->onUpdate('cascade');
 
                 $table->timestamps();
             });
@@ -45,7 +43,6 @@ class CreateProductsTable extends Migration
             Schema::table('products', function (Blueprint $table) {
                 $table->dropForeign(['category_id']);
                 $table->dropForeign(['vendor_id']);
-                $table->dropForeign(['image_id']);
             });
         }
 

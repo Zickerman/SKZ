@@ -16,4 +16,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-public/product_photos/*
+#public/product_photos/*
+#public/article_photos/*

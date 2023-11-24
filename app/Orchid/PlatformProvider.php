@@ -47,6 +47,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->title('Добавление/редактирование категорий')
                 ->route(config('platform.categories')),
 
+            Menu::make('Новости')
+                ->icon('database-add')
+                ->title('Добавление/редактирование новостей')
+                ->route(config('platform.articles')),
+
 //            Menu::make('Cards')
 //                ->icon('bs.card-text')
 //                ->route('platform.example.cards')

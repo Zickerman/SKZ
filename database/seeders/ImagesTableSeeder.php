@@ -22,11 +22,13 @@ class ImagesTableSeeder extends Seeder
                 }
 
                 $product_id = explode('_', pathinfo($file, PATHINFO_FILENAME), 2)[0];
+                $extension = pathinfo($file, PATHINFO_EXTENSION);
 
                 $image = new Image([
                     'product_id' => $product_id,
+                    'image_name' => pathinfo($file, PATHINFO_FILENAME),
                     'image_path' => '2023/10/28/',
-                    'image_name' => $file,
+                    'extension' => $extension,
                     'priority' => 0,
                 ]);
 

@@ -97,6 +97,8 @@ class Products extends Screen
                     Input::make('product.amount')->required()->title('Количество')->type('number'),
                     Input::make('product.volume')->required()->title('Объем')->type('number')->min(0)->step(0.01),
                 ]),
+                Upload::make('images')->title('Фотографии продукта')->multiple()->acceptedFiles('image/*')
+                    ->maxFiles(5)->groups('photo')->hint('Вы можете загрузить до 5 фотографий.')->storage('product_photos'),
             ]))->async('asyncGetProduct'),
         ];
     }
@@ -107,7 +109,52 @@ class Products extends Screen
         ];
     }
     public function update(Request $request){
-        Product::find($request->input('product.id'))->update($request->product);
+        $productId = $request->input('product.id');
+        $product = Product::find($productId);
+
+        if (!$product) {
+            Alert::error('Товар не найден');
+            return;
+        }
+
+        $product->update($request->product);
+
+        $newPhotoIds = $request->input('images');
+
+        if (is_array($newPhotoIds)) {
+            foreach ($newPhotoIds as $newPhotoId) {
+                try {
+                    $attachment = Attachment::findOrFail($newPhotoId);
+                    $imagePath = 'product_photos/' . $attachment->path . $attachment->name . '.' . $attachment->extension;
+
+                    $img = Images::make($imagePath);
+                    $img->fit(270, 370);
+                    $img->save($imagePath);
+
+                    $productImage = ProductImage::where('product_id', $product->id)
+                        ->update([
+                            'image_name' => $attachment->name,
+                            'image_path' => $attachment->path,
+                            'extension' => $attachment->extension,
+                        ]);
+
+                    if (!$productImage) {
+                        $productImage = new ProductImage([
+                            'product_id' => $product->id,
+                            'image_name' => $attachment->name,
+                            'image_path' => $attachment->path,
+                            'extension' => $attachment->extension,
+                        ]);
+
+                        $productImage->save();
+                    }
+
+                } catch (e) {
+                    Alert::error('Файл не найден: ' . $imagePath);
+                }
+            }
+        }
+
         Alert::success('Товар успешно обновлен');
     }
 
@@ -129,9 +176,10 @@ class Products extends Screen
 
                 if ($attachment) {
                     $productImage = new ProductImage([
-                        'image_path' => $attachment->path,
                         'product_id' => $product->id,
-                        'image_name' => $attachment->name . '.' . $attachment->extension,
+                        'image_name' => $attachment->name,
+                        'image_path' => $attachment->path,
+                        'extension' => $attachment->extension,
                         'priority' => 0,
                     ]);
 

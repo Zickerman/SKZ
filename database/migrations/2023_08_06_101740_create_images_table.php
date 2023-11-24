@@ -16,9 +16,10 @@ class CreateImagesTable extends Migration
         if (!Schema::hasTable('images')) {
             Schema::create('images', function (Blueprint $table) {
                 $table->id();
-                $table->string('image_path', 255)->nullable();
                 $table->string('image_name', 64)->nullable();
-                $table->smallInteger('priority')->unsigned()->default(0);
+                $table->string('image_path', 255)->nullable();
+                $table->string('extension', 10)->nullable();
+                $table->smallInteger('priority')->unsigned()->default(0)->nullable();
             });
         }
     }

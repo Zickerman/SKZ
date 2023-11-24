@@ -102,6 +102,7 @@ return [
     'index' => 'platform.main',
     'products' => 'platform.products',
     'categories' => 'platform.categories',
+    'articles' => 'platform.articles',
 
     /*
      |--------------------------------------------------------------------------

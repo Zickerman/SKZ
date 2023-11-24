@@ -15,6 +15,7 @@ use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\skz\Products;
 use App\Orchid\Screens\skz\Categories;
+use App\Orchid\Screens\skz\ArticlesScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -44,6 +45,11 @@ Route::screen('/products', Products::class)
 Route::screen('/categories', Categories::class)
     ->name('platform.categories')->breadcrumbs(
         fn (Trail $trail) => $trail->parent('platform.index')->push('Категории')
+    );
+
+Route::screen('/articles', ArticlesScreen::class)
+    ->name('platform.articles')->breadcrumbs(
+        fn (Trail $trail) => $trail->parent('platform.index')->push('Новости')
     );
 
 // Platform > Profile

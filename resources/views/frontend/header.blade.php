@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-md bg-success bg-gradient">
     <div class="container">
-        <a class="navbar-brand">Саракташский консервный завод</a>
+        <a class="navbar-brand d-md-none">Саракташский завод</a>
+        <a class="navbar-brand d-none d-md-block">Саракташский консервный завод</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
