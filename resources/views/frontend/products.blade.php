@@ -8,7 +8,9 @@
                     <div class="col">
                         <div class="card h-100 main_catalog_card mt-2">
                             <div style="height: 370px; overflow: hidden;">
-                                <img class="mx-auto d-block" src="{{ $product->image_path }}" alt="{{ $product->name }}">
+                                <a href="{{ route('product_show', $product->id) }}">
+                                    <img class="mx-auto d-block" src="{{ $product->image_path }}" alt="{{ $product->name }}">
+                                </a>
                             </div>
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ $product->name }}</h5>

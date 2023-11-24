@@ -56,6 +56,19 @@ class MainController extends BaseController
         return view('frontend/products', compact('products'));
     }
 
+    public function product($id)
+    {
+        $product = Product::find($id);
+
+        $imagePathsString = $product->images->map(function ($image) {
+            return asset('product_photos/'.$image->image_path.$image->image_name.'.'.$image->extension);
+        })->implode(', ');
+
+        $product->imagePathsString = $imagePathsString;
+
+        return view('frontend/detail_product_page', compact('product'));
+    }
+
     public function contacts()
     {
         return view('frontend/contacts');
