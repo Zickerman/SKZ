@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(function(){document.getElementById("order_by").addEventListener("change",(function(){document.getElementById("filterForm").submit()}))}));

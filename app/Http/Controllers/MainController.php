@@ -6,12 +6,28 @@ use App\Models\Product;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Str;
 use App\Models\Article;
+use Illuminate\Http\Request;
 
 class MainController extends BaseController
 {
-    public function articles()
+    public function articles(Request $request)
     {
-        $articles = Article::with('images')->paginate(16);
+        $orderMapping = [
+            'created_at_desc' => ['created_at', 'desc'],
+            'created_at_asc' => ['created_at', 'asc'],
+            'priority_desc' => ['priority', 'desc'],
+            'priority_asc' => ['priority', 'asc'],
+        ];
+
+        $orderBy = $request->input('order_by', 'created_at_desc');
+
+        if (!array_key_exists($orderBy, $orderMapping)) {
+            $orderBy = 'created_at_desc';
+        }
+
+        list($orderByColumn, $orderDirection) = $orderMapping[$orderBy];
+
+        $articles = Article::with('images')->orderBy($orderByColumn, $orderDirection)->paginate(16);
 
         $articles->each(function ($article) {
             $article->content = Str::limit($article->content, 80);
@@ -23,7 +39,7 @@ class MainController extends BaseController
             $article->imagePathsString = $imagePathsString;
         });
 
-        return view('frontend/main_page_info', compact('articles'));
+        return view('frontend/main_page_info', compact('articles', 'orderBy'));
     }
 
     public function article($id)

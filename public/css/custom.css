@@ -2,21 +2,14 @@
     text-indent: 40px;
 }
 
-.main_catalog_gradient {
-    background: linear-gradient(to right, #58C795, #248D5D);
-}
-
-.main_catalog_card {
-    background-color: #75C6A1;
-}
-
 .about_page_img {
     border-radius: 20px;
     opacity: 70%;
 }
 
-/*переопределение пагинации bootstrap*/
-.pagination .page-item.active .page-link {
+/*переопределение bootstrap*/
+.btn-primary,
+.pagination .page-item.active .page-link{
     background-color: #58C795;
     border-color: #248D5D;
     color: #ffffff;
@@ -27,7 +20,8 @@
 .pagination .page-item.disabled .page-link {
     color: #248D5D;
 }
-.pagination .page-item.disabled .page-link {
-    background-color: #95a5a6;
-    border-color: #95a5a6;
+
+.card-link {
+    color: #248D5D;
+    text-decoration: none;
 }
