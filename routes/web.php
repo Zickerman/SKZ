@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\MainController@articles')->name('main_page');
-Route::get('/article/{id}', 'App\Http\Controllers\MainController@article')->name('article_show');
+Route::get('/', 'App\Http\Controllers\ArticleController@articles')->name('main_page');
+Route::get('/article/{id}', 'App\Http\Controllers\ArticleController@article')->name('article_show');
 
-Route::get('/catalog', 'App\Http\Controllers\MainController@catalog')->name('catalog_page');
-Route::get('/product/{id}', 'App\Http\Controllers\MainController@product')->name('product_show');
+Route::get('/catalog', 'App\Http\Controllers\ProductController@catalog')->name('catalog_page');
+Route::get('/product/{id}', 'App\Http\Controllers\ProductController@product')->name('product_show');
 
-Route::get('/contacts', 'App\Http\Controllers\MainController@contacts')->name('contacts_page');
-Route::get('/about', 'App\Http\Controllers\MainController@about')->name('about_page');
+Route::get('/contacts', 'App\Http\Controllers\Controller@contacts')->name('contacts_page');
+Route::get('/about', 'App\Http\Controllers\Controller@about')->name('about_page');

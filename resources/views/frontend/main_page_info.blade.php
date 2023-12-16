@@ -4,8 +4,8 @@
 
     <div class="container text-center mt-4">
         <form action="{{ route('main_page') }}" method="get" class="d-flex justify-content-center align-items-center" id="filterForm">
-            <label for="order_by"></label>
-            <select class="form-select bg-success text-white w-auto mx-2" name="order_by" id="order_by">
+            <label for="sortOrder"></label>
+            <select class="form-select bg-success text-white w-auto mx-2" name="sortOrder" id="sortOrder">
                 <option value="created_at_desc" {{ $orderBy === 'created_at_desc' ? 'selected' : '' }}>сначала новые</option>
                 <option value="created_at_asc" {{ $orderBy === 'created_at_asc' ? 'selected' : '' }}>сначала старые</option>
                 <option value="priority_desc" {{ $orderBy === 'priority_desc' ? 'selected' : '' }}>важные</option>
