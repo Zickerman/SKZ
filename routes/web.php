@@ -21,3 +21,6 @@ Route::get('/product/{id}', 'App\Http\Controllers\ProductController@product')->n
 
 Route::get('/contacts', 'App\Http\Controllers\Controller@contacts')->name('contacts_page');
 Route::get('/about', 'App\Http\Controllers\Controller@about')->name('about_page');
+
+Route::get('/delivery', 'App\Http\Controllers\Controller@delivery')->name('delivery_page');
+Route::get('/delivery-points', 'App\Http\Controllers\TransportController@getDeliveryPoints')->name('delivery_points');

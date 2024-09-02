@@ -27,6 +27,11 @@
                         Контакты/Реквизиты
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('delivery') ? 'text-white' : '' }}" href="/delivery">
+                        Доставка
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

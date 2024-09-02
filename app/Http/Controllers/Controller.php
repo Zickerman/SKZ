@@ -15,4 +15,9 @@ class Controller extends BaseController
     {
         return view('frontend/about');
     }
+    
+	public function delivery()
+    {
+        return view('frontend/delivery');
+    }
 }

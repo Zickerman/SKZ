@@ -15,6 +15,7 @@
         новостями: php artisan db:seed --class=ArticlesTableSeeder
         изображениями новостей: php artisan db:seed --class=ArticlesImagesTableSeeder
 
+5.1 Для использования информации по доставке, добавить данные в .env из https://api-docs.cdek.ru/29923918.html
 
 **Полезные команды:**
 

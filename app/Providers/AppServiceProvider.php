@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Orchid\Screen\TD;
+use App\Contracts\TransportCompanyInterface;
+use App\Services\CdekTransport;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
 
             return $this;
         });
+
+		$this->app->bind(TransportCompanyInterface::class, CdekTransport::class);
     }
 
     /**

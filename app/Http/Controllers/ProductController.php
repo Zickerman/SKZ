@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Product;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class ProductController extends BaseController
@@ -26,7 +25,7 @@ class ProductController extends BaseController
         $products = $productsQuery->paginate(8);
 
         $products->each(function ($product) {
-            $product->description = Str::limit($product->description, 80);
+            $product->description = mb_substr($product->description, 0, 80);
 
             $firstImage = $product->images->first();
             if ($firstImage) {

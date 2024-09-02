@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Str;
 
 class ArticleController extends BaseController
 {
@@ -29,7 +28,7 @@ class ArticleController extends BaseController
         $articles = Article::with('images')->orderBy($orderByColumn, $orderDirection)->paginate(16);
 
         $articles->each(function ($article) {
-            $article->content = Str::limit($article->content, 80);
+            $article->content = mb_substr($article->content, 0, 80);
 
             $imagePathsString = $article->images->map(function ($image) {
                 return asset('article_photos/' . $image->image_path . $image->image_name . '.' . $image->extension);
